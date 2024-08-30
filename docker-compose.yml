@@ -1,0 +1,23 @@
+version: '3.7'
+
+services:
+  nginx:
+    build: ./nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./:/var/www/html
+    depends_on:
+      - php
+      - db
+  php:
+    build: ./php
+    volumes:
+      - ./:/var/www/html
+    depends_on:
+      - db
+  db:
+    build: ./db
+    environment:
+      MYSQL_ROOT_PASSWORD: seu_senha
+      MYSQL_DATABASE: seu_banco
